@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDF AI Assistant</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="/static/favicon.svg" alt="" width="24" height="24">
+      <span>PDF AI Assistant</span>
+    </div>
+    <form id="search-form" class="search" role="search">
+      <input id="search-input" type="search" placeholder="Search your past questions and answers" aria-label="Search history" minlength="2">
+    </form>
+    <div class="account">
+      <button id="stats-btn" class="ghost" type="button">Usage</button>
+      <span id="budget" class="budget" title="Spent today / daily limit"></span>
+      <span id="user-name" class="user"></span>
+      <a id="logout" class="ghost hidden" href="/.auth/logout">Sign out</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <label id="dropzone" class="dropzone" for="file-input">
+        <input id="file-input" type="file" accept="application/pdf,.pdf" hidden>
+        <strong>Upload a PDF</strong>
+        <span>Drop it here or click. Up to 32 MB, 600 pages.</span>
+      </label>
+      <div id="upload-status" class="status" aria-live="polite"></div>
+
+      <h2>Answer library</h2>
+      <div class="library">
+        <p id="library-count" class="muted">No approved answers yet.</p>
+        <div class="library-actions">
+          <label class="ghost button" for="library-input">Import Excel / CSV
+            <input id="library-input" type="file" accept=".xlsx,.csv" hidden></label>
+          <button id="library-view" type="button" class="ghost">View</button>
+          <a class="ghost" href="/api/library/template.csv" download>Template</a>
+        </div>
+      </div>
+
+      <h2>Documents</h2>
+      <ul id="documents" class="list"></ul>
+
+      <div id="reviews-block" class="hidden">
+        <h2>Reviews</h2>
+        <ul id="reviews" class="list"></ul>
+      </div>
+
+      <div id="sessions-block" class="hidden">
+        <h2>Conversations</h2>
+        <ul id="sessions" class="list"></ul>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section id="empty" class="empty">
+        <h1>Review a document before you sign or pay</h1>
+        <p>Upload a contract, an invoice or a tender. You get the risks, key terms, deadlines and
+           missing clauses, each backed by a quote that is checked against the PDF. Invoice totals
+           are recalculated. Then ask follow-up questions with page citations.</p>
+        <h1>Fill in questionnaires from your approved answers</h1>
+        <p>Import your library of approved answers (Excel or CSV) once. Then upload a security
+           questionnaire, an RFP or a supplier form and choose “Questionnaire”: every question is
+           answered only from the library, with the entries it came from. Questions the library
+           doesn't cover are left for a person. Download the result as Excel.</p>
+      </section>
+
+      <section id="chat" class="chat hidden">
+        <div class="chat-head">
+          <div>
+            <h1 id="doc-title"></h1>
+            <p id="doc-meta" class="muted"></p>
+          </div>
+          <div class="chat-actions">
+            <select id="playbook" aria-label="Review type"></select>
+            <button id="review-btn" type="button">Review</button>
+            <select id="summary-lang" aria-label="Language of reviews and summaries">
+              <option>English</option><option>Bulgarian</option><option>German</option>
+              <option>French</option><option>Spanish</option><option>Italian</option>
+            </select>
+            <button id="summary-btn" type="button" class="ghost">Summary</button>
+            <button id="new-chat-btn" type="button" class="ghost">New chat</button>
+          </div>
+        </div>
+        <div id="messages" class="messages" aria-live="polite"></div>
+        <form id="ask-form" class="ask">
+          <textarea id="question" rows="2" maxlength="4000" placeholder="Ask a question about this PDF… (Enter to send, Shift+Enter for a new line)" required></textarea>
+          <button id="ask-btn" type="submit">Ask</button>
+        </form>
+      </section>
+
+      <section id="review" class="results hidden">
+        <div class="chat-head">
+          <div>
+            <h1 id="review-title"></h1>
+            <p id="review-meta" class="muted"></p>
+          </div>
+          <div class="chat-actions">
+            <a id="export-xlsx" class="ghost hidden" href="#" download>Excel</a>
+            <a id="export-csv" class="ghost" href="#" download>Excel (CSV)</a>
+            <a id="export-ics" class="ghost" href="#" download>Deadlines (.ics)</a>
+            <button id="rerun-btn" type="button" class="ghost">Run again</button>
+            <button id="review-close" type="button" class="ghost">Back to chat</button>
+          </div>
+        </div>
+        <div id="review-body" class="review-body" aria-live="polite"></div>
+      </section>
+
+      <section id="results" class="results hidden">
+        <div class="chat-head">
+          <h1 id="results-title"></h1>
+          <button id="results-close" type="button" class="ghost">Close</button>
+        </div>
+        <div id="results-body"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="quote" class="quote hidden" role="dialog" aria-label="Quoted passage"></div>
+  <div id="toast" class="toast hidden" role="alert"></div>
+</body>
+</html>

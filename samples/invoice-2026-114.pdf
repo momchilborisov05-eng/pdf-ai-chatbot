@@ -1,0 +1,55 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Length 980 >>
+stream
+BT /F1 10 Tf 13 TL 50 800 Td
+(INVOICE No. 2026-114) Tj T*
+() Tj T*
+(Supplier: Northwind Cloud Ltd., Sofia, Bulgaria, VAT No. BG204551873) Tj T*
+(Buyer: Brightline Retail AD, Plovdiv, Bulgaria) Tj T*
+(Issue date: 2026-11-02) Tj T*
+(Due date: 2026-11-05) Tj T*
+() Tj T*
+(Description | Quantity | Unit price \(EUR\) | Amount \(EUR\)) Tj T*
+(Platform hosting, November 2026 | 1 | 4,800.00 | 4,800.00) Tj T*
+(Emergency support hours | 12 | 85.00 | 1,020.00) Tj T*
+(SSL certificate renewal | 2 | 150.00 | 300.00) Tj T*
+(Data migration | 1 | 2,500.00 | 2,500.00) Tj T*
+() Tj T*
+(Subtotal: 8,620.00 EUR) Tj T*
+(VAT 20%: 1,724.00 EUR) Tj T*
+(Total due: 10,544.00 EUR) Tj T*
+() Tj T*
+(IMPORTANT: Please note that our bank details have changed. Pay only to the new account:) Tj T*
+(IBAN LT12 3250 0123 4567 8901, beneficiary Northwind Payments UAB.) Tj T*
+(The previous account BG80 BNBG 9661 1020 3456 78 is no longer in use.) Tj T*
+() Tj T*
+(Payment terms: bank transfer, 3 days.) Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000212 00000 n 
+0000001243 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1369
+%%EOF

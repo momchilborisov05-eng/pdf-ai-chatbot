@@ -1,0 +1,25 @@
+[project]
+name = "pdf-ai-assistant"
+version = "2.0.0"
+description = "Chat with PDFs using Claude: page citations, saved history, cost tracking. CLI and web app."
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+exclude = [".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+# B008: FastAPI's Depends()/File() in defaults is the framework's idiom.
+# B905: zip() over a cursor row and its column names always has equal lengths.
+ignore = ["B008", "B905"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B017"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["autofill", "pdf_chat", "questionnaire", "review", "samples", "storage", "web", "test_api", "test_pdf_chat", "test_review"]

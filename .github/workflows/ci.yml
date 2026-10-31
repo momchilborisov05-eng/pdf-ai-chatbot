@@ -1,0 +1,116 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}
+
+jobs:
+  lint:
+    name: Lint (ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-dev.txt
+      - run: ruff check .
+
+  test:
+    name: Tests (Python ${{ matrix.python }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: requirements*.txt
+      - run: pip install -r requirements.txt -r requirements-dev.txt
+      # A fake Claude client is used: the tests never call the API and cost nothing.
+      - run: pytest -q
+
+  image:
+    name: Docker build, smoke test, push
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image: ${{ env.IMAGE }}:${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: pdf-ai-assistant:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Start the container and check /healthz and the web page
+        run: |
+          docker run -d --name app -p 8000:8000 -e ANTHROPIC_API_KEY=not-used pdf-ai-assistant:ci
+          for i in $(seq 1 30); do curl -fsS http://localhost:8000/healthz && break; sleep 1; done
+          curl -fsS http://localhost:8000/readyz
+          curl -fsS http://localhost:8000/ | grep -q "PDF AI Assistant"
+      - name: Show container logs
+        if: failure()
+        run: docker logs app
+      - name: Push to GitHub Container Registry
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          image=$(echo "$IMAGE" | tr '[:upper:]' '[:lower:]')
+          docker tag pdf-ai-assistant:ci "$image:${{ github.sha }}"
+          docker tag pdf-ai-assistant:ci "$image:latest"
+          docker push "$image:${{ github.sha }}"
+          docker push "$image:latest"
+
+  deploy:
+    name: Deploy to Azure Container Apps
+    runs-on: ubuntu-latest
+    needs: image
+    # Runs only once the Azure connection is configured (see README, "Deploy to Azure").
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.AZURE_CONTAINER_APP != ''
+    environment: production
+    permissions:
+      id-token: write   # OpenID Connect sign-in to Azure, no stored password
+      contents: read
+    steps:
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - name: Roll out the new image
+        run: |
+          image=$(echo "$IMAGE" | tr '[:upper:]' '[:lower:]')
+          az containerapp update \
+            --name "${{ vars.AZURE_CONTAINER_APP }}" \
+            --resource-group "${{ vars.AZURE_RESOURCE_GROUP }}" \
+            --image "$image:${{ github.sha }}"
+      - name: Wait until the new revision is ready
+        run: |
+          url=$(az containerapp show -n "${{ vars.AZURE_CONTAINER_APP }}" -g "${{ vars.AZURE_RESOURCE_GROUP }}" \
+                --query properties.configuration.ingress.fqdn -o tsv)
+          for i in $(seq 1 30); do curl -fsS "https://$url/readyz" && exit 0; sleep 10; done
+          exit 1
