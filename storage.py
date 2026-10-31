@@ -250,10 +250,11 @@ class Storage:
         parsed = urlparse(url)
         if parsed.scheme == "sqlite":
             self.dialect = "sqlite"
-            # sqlite:///relative.db -> "relative.db", sqlite:///:memory: -> ":memory:"
+            # sqlite:///relative.db -> "relative.db", sqlite:////tmp/x.db -> "/tmp/x.db",
+            # sqlite:///C:/x.db -> "C:/x.db", sqlite:///:memory: -> ":memory:"
             # check_same_thread=False: a pooled connection is used by one request at
             # a time, but not always on the thread that opened it.
-            self.conn = sqlite3.connect(parsed.path.lstrip("/") or ":memory:",
+            self.conn = sqlite3.connect(parsed.path[1:] or ":memory:",
                                         check_same_thread=False, timeout=15)
             self.conn.execute("PRAGMA foreign_keys = ON")
             self.conn.execute("PRAGMA journal_mode = WAL")  # readers don't block the writer
