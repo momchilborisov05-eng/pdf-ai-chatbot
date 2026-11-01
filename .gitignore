@@ -1,4 +1,8 @@
 __pycache__/
 *.db
+*.db-shm
+*.db-wal
 *.xlsx
 .env
+.venv/
+.pytest_cache/

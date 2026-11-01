@@ -1,0 +1,78 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Length 1088 >>
+stream
+BT /F1 10 Tf 13 TL 50 800 Td
+(SUPPLIER SECURITY AND COMPLIANCE QUESTIONNAIRE) Tj T*
+(Issued by: Brightline Retail AD, Procurement Department) Tj T*
+(Supplier: Northwind Cloud Ltd.) Tj T*
+(Please answer every question. Attach evidence where requested. Return by 2026-11-20.) Tj T*
+() Tj T*
+(Section 1. Company and certifications) Tj T*
+(1.1 What is the full legal name and registration number of your company?) Tj T*
+(1.2 Is your company certified to ISO/IEC 27001? Please state the certification body and the) Tj T*
+(expiry date.) Tj T*
+(1.3 Do you hold a SOC 2 Type II report? If yes, for which period?) Tj T*
+(1.4 How many employees does your company have?) Tj T*
+() Tj T*
+(Section 2. Data protection) Tj T*
+(2.1 In which countries is our data stored and processed?) Tj T*
+(2.2 Is customer data encrypted at rest and in transit? Describe the algorithms used.) Tj T*
+(2.3 Do you use subprocessors? Provide the current list.) Tj T*
+(2.4 Will you sign our Data Processing Agreement under Article 28 GDPR?) Tj T*
+(2.5 How quickly do you notify customers of a personal data breach?) Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 990 >>
+stream
+BT /F1 10 Tf 13 TL 50 800 Td
+(Section 3. Operations and continuity) Tj T*
+(3.1 What uptime do you guarantee, and what service credits apply when it is missed?) Tj T*
+(3.2 How often are backups taken, and how long are they kept?) Tj T*
+(3.3 What are your recovery time objective \(RTO\) and recovery point objective \(RPO\)?) Tj T*
+(3.4 When was your last disaster recovery test, and what was the result?) Tj T*
+(3.5 Do you perform annual penetration tests by an independent company?) Tj T*
+() Tj T*
+(Section 4. People and access) Tj T*
+(4.1 Is multi-factor authentication enforced for all staff with access to customer data?) Tj T*
+(4.2 Are background checks performed on employees before hiring?) Tj T*
+(4.3 How often do employees receive security awareness training?) Tj T*
+(4.4 Describe your process for removing access when an employee leaves.) Tj T*
+() Tj T*
+(Section 5. Insurance) Tj T*
+(5.1 Do you carry cyber liability insurance? State the insurer and the amount of cover.) Tj T*
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000218 00000 n 
+0000001358 00000 n 
+0000001484 00000 n 
+0000002525 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+2651
+%%EOF

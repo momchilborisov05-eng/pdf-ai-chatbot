@@ -1,1 +1,11 @@
 anthropic>=2.2.0
+pypdf>=6.0
+# Answer library import and questionnaire export (.xlsx)
+openpyxl>=3.1
+# Web app
+fastapi>=0.115
+uvicorn[standard]>=0.32
+python-multipart>=0.0.18
+# Azure SQL (PDF_CHAT_DB=mssql://...) with Microsoft Entra ID sign-in
+mssql-python>=1.16
+azure-identity>=1.19
