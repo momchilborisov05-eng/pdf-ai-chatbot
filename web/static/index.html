@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PDF AI Assistant</title>
+  <link rel="stylesheet" href="/static/fonts/fonts.css">
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/static/styles.css">
   <script src="/static/app.js" defer></script>
@@ -11,7 +12,8 @@
 <body>
   <header class="topbar">
     <div class="brand">
-      <img src="/static/favicon.svg" alt="" width="24" height="24">
+      <img src="/static/logo.png" alt="" width="22" height="22">
+      <img src="/static/favicon.svg" alt="" width="22" height="22">
       <span>PDF AI Assistant</span>
     </div>
     <form id="search-form" class="search" role="search">
@@ -28,7 +30,7 @@
   <div class="layout">
     <aside class="sidebar">
       <label id="dropzone" class="dropzone" for="file-input">
-        <input id="file-input" type="file" accept="application/pdf,.pdf" hidden>
+        <input id="file-input" class="sr-only" type="file" accept="application/pdf,.pdf">
         <strong>Upload a PDF</strong>
         <span>Drop it here or click. Up to 32 MB, 600 pages.</span>
       </label>
@@ -39,7 +41,7 @@
         <p id="library-count" class="muted">No approved answers yet.</p>
         <div class="library-actions">
           <label class="ghost button" for="library-input">Import Excel / CSV
-            <input id="library-input" type="file" accept=".xlsx,.csv" hidden></label>
+            <input id="library-input" class="sr-only" type="file" accept=".xlsx,.csv"></label>
           <button id="library-view" type="button" class="ghost">View</button>
           <a class="ghost" href="/api/library/template.csv" download>Template</a>
         </div>
@@ -61,11 +63,12 @@
 
     <main class="main">
       <section id="empty" class="empty">
+        <img src="/static/hero.jpg" alt="" class="hero">
         <h1>Review a document before you sign or pay</h1>
         <p>Upload a contract, an invoice or a tender. You get the risks, key terms, deadlines and
            missing clauses, each backed by a quote that is checked against the PDF. Invoice totals
            are recalculated. Then ask follow-up questions with page citations.</p>
-        <h1>Fill in questionnaires from your approved answers</h1>
+        <h2>Fill in questionnaires from your approved answers</h2>
         <p>Import your library of approved answers (Excel or CSV) once. Then upload a security
            questionnaire, an RFP or a supplier form and choose “Questionnaire”: every question is
            answered only from the library, with the entries it came from. Questions the library
@@ -89,7 +92,7 @@
             <button id="new-chat-btn" type="button" class="ghost">New chat</button>
           </div>
         </div>
-        <div id="messages" class="messages" aria-live="polite"></div>
+        <div id="messages" class="messages"></div>
         <form id="ask-form" class="ask">
           <textarea id="question" rows="2" maxlength="4000" placeholder="Ask a question about this PDF… (Enter to send, Shift+Enter for a new line)" required></textarea>
           <button id="ask-btn" type="submit">Ask</button>
@@ -110,7 +113,7 @@
             <button id="review-close" type="button" class="ghost">Back to chat</button>
           </div>
         </div>
-        <div id="review-body" class="review-body" aria-live="polite"></div>
+        <div id="review-body" class="review-body"></div>
       </section>
 
       <section id="results" class="results hidden">
@@ -123,7 +126,7 @@
     </main>
   </div>
 
-  <div id="quote" class="quote hidden" role="dialog" aria-label="Quoted passage"></div>
+  <div id="quote" class="quote hidden" role="status" aria-live="polite"></div>
   <div id="toast" class="toast hidden" role="alert"></div>
 </body>
 </html>
