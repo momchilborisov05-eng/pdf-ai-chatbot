@@ -1,5 +1,6 @@
 anthropic>=2.2.0
-pypdf>=6.0
+# pdfqa reads pypdf's layout internals; pinned below the next major version.
+pypdf>=6.0,<7
 # Answer library import and questionnaire export (.xlsx)
 openpyxl>=3.1
 # Web app

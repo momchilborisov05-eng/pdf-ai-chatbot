@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PDF AI Assistant cover</title>
+<style>
+  @font-face { font-family: "IBM Plex Sans"; font-weight: 400; src: url(../web/static/fonts/ibm-plex-sans-400-latin.woff2) format("woff2"); }
+  @font-face { font-family: "IBM Plex Sans"; font-weight: 600; src: url(../web/static/fonts/ibm-plex-sans-600-latin.woff2) format("woff2"); }
+  :root {
+    --bg: #f4f3ef; --panel: #ffffff; --text: #16211f; --muted: #67706d; --line: #e2e1db;
+    --accent: #0f6e63; --accent-soft: #e6f1ee; --low: #1f7a4d; --low-soft: #e7f3ec;
+    --high: #a63d2f; --high-soft: #f8ebe8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    width: 1280px; height: 640px; overflow: hidden; background: var(--bg); color: var(--text);
+    font-family: "IBM Plex Sans", sans-serif; display: grid; grid-template-columns: 600px 1fr;
+    gap: 40px; padding: 56px 56px 48px;
+    border-top: 6px solid var(--accent);
+  }
+  .eyebrow { font-weight: 600; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+  h1 { font-size: 46px; line-height: 1.08; letter-spacing: -.02em; margin: 14px 0 16px; font-weight: 600; }
+  .lede { font-size: 18px; line-height: 1.5; color: var(--muted); margin: 0 0 28px; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .stat b { display: block; font-size: 28px; font-weight: 600; letter-spacing: -.02em; }
+  .stat b small { font-size: 15px; font-weight: 400; color: var(--muted); letter-spacing: 0; }
+  .stat span { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .foot { margin-top: 22px; font-size: 13px; color: var(--muted); }
+
+  .page {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px;
+    box-shadow: 0 12px 32px rgba(22, 33, 31, .10); position: relative; height: 100%;
+  }
+  .runhead { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted);
+    border-bottom: 1px dashed var(--line); padding-bottom: 8px; margin-bottom: 14px; }
+  .runhead s { text-decoration-color: var(--high); }
+  .ph { font-size: 17px; font-weight: 600; margin: 0 0 10px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .col { position: relative; padding-top: 22px; }
+  .col::before { content: attr(data-n); position: absolute; top: 0; left: 0; font-size: 11px; font-weight: 600;
+    color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 2px 10px; }
+  .line { height: 7px; border-radius: 4px; background: #e9e8e2; margin: 0 0 8px; }
+  .hl { background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: 6px;
+    padding: 12px; font-size: 13px; line-height: 1.45; margin: 4px 0 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 14px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; color: var(--muted); }
+  tr.hit td { background: var(--accent-soft); font-weight: 600; }
+  .answer {
+    position: absolute; right: -18px; bottom: 26px; width: 330px; background: var(--panel);
+    border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px;
+    box-shadow: 0 12px 32px rgba(22, 33, 31, .18);
+  }
+  .answer .q { font-size: 12px; color: var(--muted); }
+  .answer .a { font-size: 22px; font-weight: 600; margin: 4px 0 8px; }
+  .answer .a em { font-style: normal; font-size: 12px; font-weight: 600; color: var(--accent);
+    background: var(--accent-soft); border-radius: 6px; padding: 3px 8px; margin-left: 8px; vertical-align: 4px; }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; }
+  .badge { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+    border-radius: 999px; padding: 4px 10px; }
+  .ok { background: var(--low-soft); color: var(--low); }
+  .bad { background: var(--high-soft); color: var(--high); }
+</style>
+</head>
+<body>
+  <section>
+    <div class="eyebrow">PDF AI Assistant</div>
+    <h1>Answers from PDFs, with the page and a quote that is checked</h1>
+    <p class="lede">Layout-aware parsing reads two-column pages in order, keeps table rows with their
+      headers, and drops running headers. Every cited quote is looked up on its page before it is shown.</p>
+    <div class="stats">
+      <div class="stat"><b>94.9% <small>vs 61.0%</small></b><span>answer + page correct, vs naive pypdf chunks</span></div>
+      <div class="stat"><b>18/18 <small>vs 4/18</small></b><span>two-column quotes found verbatim</span></div>
+      <div class="stat"><b>0.972 <small>MRR</small></b><span>recall@3 100% on 59 questions</span></div>
+      <div class="stat"><b>52/52</b><span>quotes with a changed number flagged</span></div>
+    </div>
+    <div class="foot">Offline benchmark: 5 generated PDFs, 66 questions. Claude chat mode via the Citations API.</div>
+  </section>
+
+  <section>
+    <div class="page">
+      <div class="runhead"><s>Halden Group - Staff Travel Policy (v3.2)</s><span>removed as furniture</span></div>
+      <p class="ph">5 Accommodation</p>
+      <div class="cols">
+        <div class="col" data-n="column 1">
+          <div class="line" style="width:96%"></div><div class="line" style="width:88%"></div>
+          <div class="hl">Hotels are booked up to the city rate in the table below, per night,
+            including breakfast and taxes.</div>
+          <div class="line" style="width:92%"></div><div class="line" style="width:70%"></div>
+        </div>
+        <div class="col" data-n="column 2">
+          <div class="line" style="width:94%"></div><div class="line" style="width:90%"></div>
+          <div class="line" style="width:97%"></div><div class="line" style="width:84%"></div>
+          <div class="line" style="width:91%"></div><div class="line" style="width:60%"></div>
+        </div>
+      </div>
+      <table>
+        <tr><th>City</th><th>Hotel rate</th><th>Meal allowance</th></tr>
+        <tr><td>Berlin</td><td>EUR 160</td><td>EUR 52</td></tr>
+        <tr class="hit"><td>London</td><td>EUR 230</td><td>EUR 64</td></tr>
+        <tr><td>Paris</td><td>EUR 210</td><td>EUR 60</td></tr>
+        <tr><td>Sofia</td><td>EUR 110</td><td>EUR 38</td></tr>
+      </table>
+      <div class="answer">
+        <div class="q">What is the hotel rate per night in London?</div>
+        <div class="a">EUR 230 <em>p. 3</em></div>
+        <div class="badges"><span class="badge ok">quote verified on page</span><span class="badge bad">EUR 250? flagged</span></div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

@@ -165,7 +165,7 @@ function addMessage(role, text, extra = {}) {
 // ---------- views ----------
 
 function show(view) {
-  for (const id of ["empty", "chat", "review", "results"]) $(id).classList.toggle("hidden", id !== view);
+  for (const id of ["empty", "chat", "review", "results", "inspect"]) $(id).classList.toggle("hidden", id !== view);
 }
 
 async function refreshMe() {
@@ -673,7 +673,113 @@ async function showStats() {
   }
 }
 
+// ---------- inspect: parsed layout and offline evidence search ----------
+
+const VERIFIED = {
+  verified: ["low", "Quote verified on this page"],
+  moved: ["medium", "Quote found on another page (corrected)"],
+  not_found: ["high", "Quote not found in the PDF"],
+  unchecked: ["medium", "No text layer to check against"],
+};
+
+function tableNode(rows) {
+  const [head, ...body] = rows;
+  return el("table", { class: "parsed-table" },
+    el("tr", {}, head.map((c) => el("th", {}, c))),
+    body.map((r) => el("tr", {}, r.map((c) => el("td", {}, c)))));
+}
+
+function structureNode(s) {
+  const st = s.stats;
+  const kpi = (value, label) => el("div", { class: "kpi" }, el("b", {}, String(value)), el("span", {}, label));
+  // Open the first page, and the first page with a table when that is another one.
+  const firstTable = s.pages.find((p) => p.blocks.some((b) => b.kind === "table"))?.page;
+  const pagesNode = s.pages.map((p) => {
+    const blocks = p.blocks.filter((b) => b.kind !== "paragraph" || b.text.length > 0);
+    const open = p.page === 1 || p.page === firstTable;
+    return el("details", { class: "page-card", ...(open ? { open: "" } : {}) },
+      el("summary", {},
+        el("b", {}, `Page ${p.page}`),
+        el("span", { class: "tag" }, p.columns === 2 ? "2 columns" : "1 column"),
+        p.blocks.some((b) => b.kind === "table") ? el("span", { class: "tag" }, "table") : null,
+        p.positioned ? null : el("span", { class: "tag warn" }, "plain text only"),
+        p.furniture.length ? el("span", { class: "tag muted-tag" }, `${p.furniture.length} removed`) : null),
+      p.furniture.length
+        ? el("p", { class: "furniture" }, "Removed as running header/footer: ",
+          p.furniture.map((f) => el("code", {}, f)))
+        : null,
+      blocks.map((b) => {
+        const col = b.column ? el("span", { class: "col" }, b.column === 1 ? "L" : "R") : null;
+        if (b.kind === "heading") return el(`h${Math.min(4, b.level + 2)}`, { class: "parsed-h" }, col, b.text);
+        if (b.kind === "table") return el("div", { class: "parsed-block" }, col, tableNode(b.rows));
+        return el("p", { class: "parsed-p" }, col, b.text.length > 220 ? `${b.text.slice(0, 220)}…` : b.text);
+      }));
+  });
+  return el("div", {},
+    el("div", { class: "kpis" },
+      kpi(st.pages, "pages"), kpi(st.two_column_pages, "two-column pages"),
+      kpi(st.tables, "tables"), kpi(st.table_row_chunks, "row chunks"),
+      kpi(st.headings, "headings"), kpi(st.furniture_lines, "furniture lines removed")),
+    s.outline.length
+      ? el("ol", { class: "outline" }, s.outline.map((h) =>
+        el("li", { class: `lvl${Math.min(h.level, 3)}` }, h.title, el("small", {}, ` p. ${h.page}`))))
+      : null,
+    pagesNode);
+}
+
+function evidenceNode(r) {
+  const [tone, label] = VERIFIED[r.verified] || VERIFIED.unchecked;
+  const head = r.abstained
+    ? el("div", { class: "answer-card abstained" },
+      el("b", {}, "Not in the document"),
+      el("p", { class: "muted" }, "The best passages share too few of the question's words to answer from them."))
+    : el("div", { class: "answer-card" },
+      el("div", { class: "answer-line" }, el("span", { class: "answer" }, r.answer),
+        el("span", { class: "chip static" }, `p. ${r.page}`)),
+      el("q", {}, r.quote),
+      el("div", { class: "answer-meta" },
+        el("span", { class: `badge ${tone}` }, label),
+        el("span", { class: "muted" },
+          `${r.answer_type} · ${r.section || "no section"} · ${r.latency_ms} ms`)));
+  return el("div", {}, head,
+    el("h3", {}, "Ranked passages"),
+    el("ol", { class: "passages" }, r.passages.map((p) => el("li", {},
+      el("small", {}, `p. ${p.page} · ${p.kind === "table_row" ? "table row" : "text"}${p.section ? ` · ${p.section}` : ""} · score ${p.score}`),
+      el("div", {}, p.text.length > 300 ? `${p.text.slice(0, 300)}…` : p.text)))));
+}
+
+async function openInspect() {
+  if (!state.doc) return;
+  $("inspect-title").textContent = state.doc.filename;
+  $("inspect-meta").textContent = "Layout-aware parse: reading order, tables, headings, running headers removed";
+  $("structure-body").replaceChildren(el("p", { class: "muted" }, "Parsing…"));
+  $("evidence-result").replaceChildren();
+  show("inspect");
+  try {
+    $("structure-body").replaceChildren(structureNode(await api(`/api/documents/${state.doc.id}/structure`)));
+  } catch (err) {
+    toast(err.message);
+  }
+}
+
+async function findEvidence(question) {
+  try {
+    const r = await postJson(`/api/documents/${state.doc.id}/ask`, { question, k: 5 });
+    $("evidence-result").replaceChildren(evidenceNode(r));
+  } catch (err) {
+    toast(err.message);
+  }
+}
+
 // ---------- wiring ----------
+
+$("inspect-btn").addEventListener("click", openInspect);
+$("inspect-close").addEventListener("click", () => show("chat"));
+$("evidence-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const q = $("evidence-q").value.trim();
+  if (q) findEvidence(q);
+});
 
 $("file-input").addEventListener("change", (e) => { upload(e.target.files[0]); e.target.value = ""; });
 const zone = $("dropzone");

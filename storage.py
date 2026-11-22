@@ -83,6 +83,10 @@ SQLITE_SCHEMA = [
         text         TEXT    NOT NULL,
         PRIMARY KEY (document_id, page)
     )""",
+    """CREATE TABLE IF NOT EXISTS layouts (
+        document_id  INTEGER PRIMARY KEY REFERENCES documents(id) ON DELETE CASCADE,
+        data         TEXT    NOT NULL
+    )""",
     """CREATE TABLE IF NOT EXISTS reviews (
         id                  INTEGER PRIMARY KEY AUTOINCREMENT,
         document_id         INTEGER NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
@@ -164,6 +168,10 @@ MSSQL_SCHEMA = [
         page         INT            NOT NULL,
         text         NVARCHAR(MAX)  NOT NULL,
         CONSTRAINT pk_pages PRIMARY KEY (document_id, page)
+    )""",
+    """IF OBJECT_ID('layouts', 'U') IS NULL CREATE TABLE layouts (
+        document_id  INT            NOT NULL PRIMARY KEY REFERENCES documents(id) ON DELETE CASCADE,
+        data         NVARCHAR(MAX)  NOT NULL
     )""",
     """IF OBJECT_ID('reviews', 'U') IS NULL CREATE TABLE reviews (
         id                  INT IDENTITY(1,1) PRIMARY KEY,
@@ -381,6 +389,30 @@ class Storage:
     def get_pages(self, doc_id: int) -> list[str]:
         rows = self._query("SELECT text FROM pages WHERE document_id = ? ORDER BY page", (doc_id,))
         return [r["text"] for r in rows]
+
+    def save_layout(self, doc_id: int, layout: dict):
+        """Store the parsed layout (pdfqa.ParsedDocument.to_dict()) once per document."""
+        cur = self.conn.cursor()
+        cur.execute("SELECT COUNT(*) FROM layouts WHERE document_id = ?", (doc_id,))
+        if int(cur.fetchone()[0]) == 0:
+            cur.execute("INSERT INTO layouts (document_id, data) VALUES (?, ?)",
+                        (doc_id, json.dumps(layout, ensure_ascii=False)))
+        self.conn.commit()
+
+    def get_layout(self, doc_id: int) -> dict | None:
+        rows = self._query("SELECT data FROM layouts WHERE document_id = ?", (doc_id,))
+        return json.loads(rows[0]["data"]) if rows else None
+
+    def get_page_variants(self, doc_id: int) -> list[list[str]]:
+        """Per page: the raw text layer and, when parsed, the layout reading-order text.
+
+        Quotes are checked against both, so a quote from a two-column page matches
+        whichever extraction kept its words together.
+        """
+        raw = self.get_pages(doc_id)
+        layout = self.get_layout(doc_id)
+        ordered = [p.get("text", "") for p in layout["pages"]] if layout else []
+        return [[text, ordered[i] if i < len(ordered) else ""] for i, text in enumerate(raw)]
 
     def delete_document(self, doc_id: int, owner: str) -> dict | None:
         """Delete a document with all its sessions; returns the deleted row."""

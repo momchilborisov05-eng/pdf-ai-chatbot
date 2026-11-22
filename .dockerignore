@@ -11,3 +11,8 @@ __pycache__
 tests
 infra
 docs
+eval
+examples
+scripts
+samples
+.claude

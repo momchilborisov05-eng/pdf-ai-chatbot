@@ -1,0 +1,163 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 2646 >>
+stream
+BT /F1 8.5 Tf 1 0 0 1 56.00 806.00 Tm (Hydrex HX-200 - Installation and Maintenance Manual) Tj ET
+BT /F1 8.5 Tf 1 0 0 1 421.05 34.00 Tm (HXM-200-EN rev. C   |   page 1) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 745.20 Tm (HX-200 Circulation Pump) Tj ET
+BT /F2 12.5 Tf 1 0 0 1 56.00 721.03 Tm (1 Safety) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 704.28 Tm (Read this manual before installing the pump. Only qualified electricians may connect the pump to the mains) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 691.28 Tm (supply.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 671.28 Tm (Disconnect the power supply and wait at least 5 minutes before opening the terminal box, because the frequ-) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 658.28 Tm (ency converter capacitors stay charged.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 638.28 Tm (The pump must not run dry. Running without fluid for more than 30 seconds damages the mechanical seal.) Tj ET
+BT /F2 12.5 Tf 1 0 0 1 56.00 611.90 Tm (2 Technical data) Tj ET
+BT /F2 9.5 Tf 1 0 0 1 56.00 593.43 Tm (Parameter) Tj ET
+BT /F2 9.5 Tf 1 0 0 1 245.16 593.43 Tm (Value) Tj ET
+BT /F2 9.5 Tf 1 0 0 1 350.07 593.43 Tm (Unit) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 578.70 Tm (Rated power) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 245.16 578.70 Tm (2.2) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 350.07 578.70 Tm (kW) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 563.98 Tm (Supply voltage) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 245.16 563.98 Tm (400) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 350.07 563.98 Tm (V) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 549.25 Tm (Maximum flow) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 245.16 549.25 Tm (36) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 350.07 549.25 Tm (m3/h) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 534.52 Tm (Maximum head) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 245.16 534.52 Tm (28) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 350.07 534.52 Tm (m) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 519.80 Tm (Maximum operating pressure) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 245.16 519.80 Tm (10) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 350.07 519.80 Tm (bar) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 505.07 Tm (Fluid temperature range) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 245.16 505.07 Tm (-10 to 110) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 350.07 505.07 Tm (C) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 490.35 Tm (Weight) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 245.16 490.35 Tm (41) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 350.07 490.35 Tm (kg) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 475.62 Tm (Sound pressure level) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 245.16 475.62 Tm (58) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 350.07 475.62 Tm (dB\(A\)) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 453.13 Tm (The values apply to water at 20 C. For water and glycol mixtures, the maximum flow is reduced; see the sele-) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 440.13 Tm (ction software.) Tj ET
+
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 1470 >>
+stream
+BT /F1 8.5 Tf 1 0 0 1 56.00 806.00 Tm (Hydrex HX-200 - Installation and Maintenance Manual) Tj ET
+BT /F1 8.5 Tf 1 0 0 1 421.05 34.00 Tm (HXM-200-EN rev. C   |   page 2) Tj ET
+BT /F2 12.5 Tf 1 0 0 1 56.00 750.62 Tm (3 Installation) Tj ET
+BT /F2 12.5 Tf 1 0 0 1 56.00 727.50 Tm (3.1 Location) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 710.75 Tm (Install the pump indoors in a frost-free, ventilated room. Leave at least 300 mm of free space above the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 697.75 Tm (motor for cooling air and service access.) Tj ET
+BT /F2 12.5 Tf 1 0 0 1 56.00 671.38 Tm (3.2 Pipework) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 654.62 Tm (Fit isolating valves on both sides of the pump. The suction pipe must rise continuously towards the pump to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 641.62 Tm (avoid air pockets.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 621.62 Tm (Tighten the flange bolts crosswise to a torque of 45 Nm. Support the pipes so that their weight does not rest) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 608.62 Tm (on the pump housing.) Tj ET
+BT /F2 12.5 Tf 1 0 0 1 56.00 582.25 Tm (3.3 Electrical connection) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 565.50 Tm (Protect the supply with a 16 A type C circuit breaker. The motor has built-in thermal protection and does not) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 552.50 Tm (require an external overload relay.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 532.50 Tm (Earth the pump before connecting the phases. Use cable glands rated IP55 or better.) Tj ET
+
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 1616 >>
+stream
+BT /F1 8.5 Tf 1 0 0 1 56.00 806.00 Tm (Hydrex HX-200 - Installation and Maintenance Manual) Tj ET
+BT /F1 8.5 Tf 1 0 0 1 421.05 34.00 Tm (HXM-200-EN rev. C   |   page 3) Tj ET
+BT /F2 12.5 Tf 1 0 0 1 56.00 750.62 Tm (4 Commissioning) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 733.88 Tm (Fill and vent the pump before the first start. Open the vent screw until fluid without bubbles comes out, then) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 720.88 Tm (close it again.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 700.88 Tm (Check the direction of rotation: the motor fan must turn clockwise when seen from the fan end. Swap two) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 687.88 Tm (phases if it turns the wrong way.) Tj ET
+BT /F2 12.5 Tf 1 0 0 1 56.00 661.50 Tm (5 Maintenance) Tj ET
+BT /F2 12.5 Tf 1 0 0 1 56.00 638.38 Tm (5.1 Maintenance intervals) Tj ET
+BT /F2 9.5 Tf 1 0 0 1 56.00 619.90 Tm (Task) Tj ET
+BT /F2 9.5 Tf 1 0 0 1 257.93 619.90 Tm (Interval) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 605.17 Tm (Check for leaks at the shaft seal) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 257.93 605.17 Tm (Every 3 months) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 590.45 Tm (Clean the motor cooling fins) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 257.93 590.45 Tm (Every 6 months) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 575.72 Tm (Replace the mechanical seal) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 257.93 575.72 Tm (Every 16,000 operating hours) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 561.00 Tm (Replace the motor bearings) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 257.93 561.00 Tm (Every 30,000 operating hours) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 538.50 Tm (Record every maintenance task in the log at the back of this manual.) Tj ET
+
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 1562 >>
+stream
+BT /F1 8.5 Tf 1 0 0 1 56.00 806.00 Tm (Hydrex HX-200 - Installation and Maintenance Manual) Tj ET
+BT /F1 8.5 Tf 1 0 0 1 421.05 34.00 Tm (HXM-200-EN rev. C   |   page 4) Tj ET
+BT /F2 12.5 Tf 1 0 0 1 56.00 750.62 Tm (6 Troubleshooting) Tj ET
+BT /F2 9.5 Tf 1 0 0 1 56.00 732.15 Tm (Fault) Tj ET
+BT /F2 9.5 Tf 1 0 0 1 208.58 732.15 Tm (Cause) Tj ET
+BT /F2 9.5 Tf 1 0 0 1 385.00 732.15 Tm (Remedy) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 717.42 Tm (Pump does not start) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 208.58 717.42 Tm (Thermal protection tripped) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 385.00 717.42 Tm (Let the motor cool for 20 minutes) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 702.70 Tm (Noise from the pump) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 208.58 702.70 Tm (Cavitation) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 385.00 702.70 Tm (Increase the inlet pressure) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 56.00 687.97 Tm (Leak at the shaft) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 208.58 687.97 Tm (Worn mechanical seal) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 385.00 687.97 Tm (Replace the seal) Tj ET
+BT /F2 12.5 Tf 1 0 0 1 56.00 659.10 Tm (7 Warranty) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 642.35 Tm (The pump is covered by a warranty of 24 months from the date of installation, or 30 months from the date of) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 629.35 Tm (delivery, whichever ends first.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 609.35 Tm (The warranty does not cover wear parts such as the mechanical seal and the bearings.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 589.35 Tm (Spare parts are available for at least 10 years after production of the model ends.) Tj ET
+
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000135 00000 n 
+0000000232 00000 n 
+0000000334 00000 n 
+0000003032 00000 n 
+0000003168 00000 n 
+0000004690 00000 n 
+0000004826 00000 n 
+0000006494 00000 n 
+0000006631 00000 n 
+0000008246 00000 n 
+trailer
+<< /Size 13 /Root 1 0 R >>
+startxref
+8384
+%%EOF

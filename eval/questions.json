@@ -1,0 +1,582 @@
+[
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "How many passenger journeys did Meridian carry in 2025?",
+  "answers": [
+   "112.4 million"
+  ],
+  "page": 1,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "What overall punctuality did Meridian reach?",
+  "answers": [
+   "94.2 percent"
+  ],
+  "page": 1,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "What share of delay minutes was caused by signalling failures on the Harbour Line?",
+  "answers": [
+   "31 percent"
+  ],
+  "page": 1,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "How many stations does the network have now?",
+  "answers": [
+   "64"
+  ],
+  "page": 1,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "How much of the capital programme is reserved for new rolling stock?",
+  "answers": [
+   "EUR 210 million"
+  ],
+  "page": 1,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "How many people did Meridian employ at year end?",
+  "answers": [
+   "3,912"
+  ],
+  "page": 2,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "What was the staff turnover rate?",
+  "answers": [
+   "8.6 percent"
+  ],
+  "page": 2,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "How much traction energy was used per train kilometre?",
+  "answers": [
+   "19.6 kWh"
+  ],
+  "page": 2,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "By when will the diesel units on the Northern Loop be replaced?",
+  "answers": [
+   "2028"
+  ],
+  "page": 2,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "How many journeys did the Airport Express carry in 2025?",
+  "answers": [
+   "19.3 million"
+  ],
+  "page": 3,
+  "kind": "table"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "What was the punctuality of the Western Branch?",
+  "answers": [
+   "95.6%"
+  ],
+  "page": 3,
+  "kind": "table"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "What was the average fare per journey?",
+  "answers": [
+   "EUR 4.32"
+  ],
+  "page": 3,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "How much non-fare income came from advertising, retail units and property rentals?",
+  "answers": [
+   "EUR 57 million"
+  ],
+  "page": 3,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "What was net debt at 31 December 2025?",
+  "answers": [
+   "EUR 402 million"
+  ],
+  "page": 4,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "What EBITDA margin did Meridian report?",
+  "answers": [
+   "17.6 percent"
+  ],
+  "page": 4,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "When will fares rise?",
+  "answers": [
+   "1 March 2026"
+  ],
+  "page": 4,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "Which firm audited the financial statements?",
+  "answers": [
+   "Calder & Wynn LLP"
+  ],
+  "page": 4,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "How many new battery-electric trains will enter service?",
+  "answers": [
+   "24"
+  ],
+  "page": 4,
+  "kind": "two-column"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "What is the chief executive's annual salary?",
+  "answers": [],
+  "page": null,
+  "kind": "unanswerable"
+ },
+ {
+  "doc": "meridian-annual-report.pdf",
+  "question": "How many buses does Meridian operate in the suburbs?",
+  "answers": [],
+  "page": null,
+  "kind": "unanswerable"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "What is the rated power of the HX-200?",
+  "answers": [
+   "2.2 kW"
+  ],
+  "page": 1,
+  "kind": "table"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "What is the maximum operating pressure?",
+  "answers": [
+   "10 bar"
+  ],
+  "page": 1,
+  "kind": "table"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "What is the weight of the pump?",
+  "answers": [
+   "41 kg"
+  ],
+  "page": 1,
+  "kind": "table"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "How long must you wait before opening the terminal box?",
+  "answers": [
+   "5 minutes"
+  ],
+  "page": 1,
+  "kind": "text"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "How long can the pump run dry before the mechanical seal is damaged?",
+  "answers": [
+   "30 seconds"
+  ],
+  "page": 1,
+  "kind": "text"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "How much free space is needed above the motor?",
+  "answers": [
+   "300 mm"
+  ],
+  "page": 2,
+  "kind": "text"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "What torque should the flange bolts be tightened to?",
+  "answers": [
+   "45 Nm"
+  ],
+  "page": 2,
+  "kind": "text"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "Which circuit breaker should protect the supply?",
+  "answers": [
+   "16 A type C"
+  ],
+  "page": 2,
+  "kind": "text"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "Which way must the motor fan turn?",
+  "answers": [
+   "clockwise"
+  ],
+  "page": 3,
+  "kind": "text"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "How often should the mechanical seal be replaced?",
+  "answers": [
+   "16,000 operating hours"
+  ],
+  "page": 3,
+  "kind": "table"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "How often should the motor cooling fins be cleaned?",
+  "answers": [
+   "6 months"
+  ],
+  "page": 3,
+  "kind": "table"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "What is the remedy for noise caused by cavitation?",
+  "answers": [
+   "Increase the inlet pressure"
+  ],
+  "page": 4,
+  "kind": "table"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "How long is the warranty from the date of installation?",
+  "answers": [
+   "24 months"
+  ],
+  "page": 4,
+  "kind": "text"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "For how many years are spare parts available?",
+  "answers": [
+   "10 years"
+  ],
+  "page": 4,
+  "kind": "text"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "What is the list price of the HX-200 pump?",
+  "answers": [],
+  "page": null,
+  "kind": "unanswerable"
+ },
+ {
+  "doc": "hx200-pump-manual.pdf",
+  "question": "Is the pump certified for use with drinking water?",
+  "answers": [],
+  "page": null,
+  "kind": "unanswerable"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "How far in advance must trips be booked through the travel agency?",
+  "answers": [
+   "14 days"
+  ],
+  "page": 1,
+  "kind": "text"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "Which travel agency must be used for bookings?",
+  "answers": [
+   "Northstar Travel"
+  ],
+  "page": 1,
+  "kind": "text"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "When may premium economy be booked?",
+  "answers": [
+   "more than 6 hours"
+  ],
+  "page": 2,
+  "kind": "text"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "Who must approve business class flights?",
+  "answers": [
+   "chief financial officer"
+  ],
+  "page": 2,
+  "kind": "text"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "What is the mileage rate for using your own car?",
+  "answers": [
+   "EUR 0.32"
+  ],
+  "page": 2,
+  "kind": "text"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "Above what journey time is first class rail allowed?",
+  "answers": [
+   "2 hours"
+  ],
+  "page": 2,
+  "kind": "text"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "What is the hotel rate per night in London?",
+  "answers": [
+   "EUR 230"
+  ],
+  "page": 3,
+  "kind": "table"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "What is the daily meal allowance in Sofia?",
+  "answers": [
+   "EUR 38"
+  ],
+  "page": 3,
+  "kind": "table"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "By how much is the allowance reduced when lunch is provided?",
+  "answers": [
+   "35 percent"
+  ],
+  "page": 4,
+  "kind": "text"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "Within how many days must expense claims be submitted?",
+  "answers": [
+   "30 days"
+  ],
+  "page": 4,
+  "kind": "text"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "Above what amount is an itemised receipt required?",
+  "answers": [
+   "EUR 25"
+  ],
+  "page": 4,
+  "kind": "text"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "How many lost-receipt declarations are accepted per calendar year?",
+  "answers": [
+   "two"
+  ],
+  "page": 4,
+  "kind": "text"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "Up to what amount are medical emergencies abroad covered?",
+  "answers": [
+   "EUR 2 million"
+  ],
+  "page": 5,
+  "kind": "text"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "What is the travel insurance policy number?",
+  "answers": [
+   "TRV-55-0192"
+  ],
+  "page": 5,
+  "kind": "text"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "How often is the travel policy reviewed?",
+  "answers": [
+   "every two years"
+  ],
+  "page": 5,
+  "kind": "text"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "Can employees bring their family on business trips?",
+  "answers": [],
+  "page": null,
+  "kind": "unanswerable"
+ },
+ {
+  "doc": "travel-policy.pdf",
+  "question": "How many days of parental leave do employees get?",
+  "answers": [],
+  "page": null,
+  "kind": "unanswerable"
+ },
+ {
+  "doc": "service-agreement.pdf",
+  "question": "What is the monthly fee?",
+  "answers": [
+   "EUR 4,800"
+  ],
+  "page": 1,
+  "kind": "text"
+ },
+ {
+  "doc": "service-agreement.pdf",
+  "question": "How long is the initial term of the agreement?",
+  "answers": [
+   "24 months"
+  ],
+  "page": 1,
+  "kind": "text"
+ },
+ {
+  "doc": "service-agreement.pdf",
+  "question": "How many days before the end of the term must notice of non-renewal be given?",
+  "answers": [
+   "120 days"
+  ],
+  "page": 1,
+  "kind": "text"
+ },
+ {
+  "doc": "service-agreement.pdf",
+  "question": "What interest is charged on late payments?",
+  "answers": [
+   "2% per month"
+  ],
+  "page": 1,
+  "kind": "text"
+ },
+ {
+  "doc": "service-agreement.pdf",
+  "question": "What penalty applies for breaching the exclusivity clause?",
+  "answers": [
+   "EUR 50,000"
+  ],
+  "page": 2,
+  "kind": "text"
+ },
+ {
+  "doc": "service-agreement.pdf",
+  "question": "By what date must administrator access to the platform be provided?",
+  "answers": [
+   "20 November 2026"
+  ],
+  "page": 2,
+  "kind": "text"
+ },
+ {
+  "doc": "service-agreement.pdf",
+  "question": "Which laws govern the agreement?",
+  "answers": [
+   "Republic of Bulgaria"
+  ],
+  "page": 2,
+  "kind": "text"
+ },
+ {
+  "doc": "service-agreement.pdf",
+  "question": "What is the supplier's response time for critical incidents?",
+  "answers": [],
+  "page": null,
+  "kind": "unanswerable"
+ },
+ {
+  "doc": "invoice-2026-114.pdf",
+  "question": "What is the total due on the invoice?",
+  "answers": [
+   "10,544.00 EUR"
+  ],
+  "page": 1,
+  "kind": "text"
+ },
+ {
+  "doc": "invoice-2026-114.pdf",
+  "question": "What is the due date of the invoice?",
+  "answers": [
+   "2026-11-05"
+  ],
+  "page": 1,
+  "kind": "text"
+ },
+ {
+  "doc": "invoice-2026-114.pdf",
+  "question": "How many emergency support hours were billed?",
+  "answers": [
+   "12"
+  ],
+  "page": 1,
+  "kind": "table"
+ },
+ {
+  "doc": "invoice-2026-114.pdf",
+  "question": "What is the new IBAN for payment?",
+  "answers": [
+   "LT12 3250 0123 4567 8901"
+  ],
+  "page": 1,
+  "kind": "text"
+ },
+ {
+  "doc": "invoice-2026-114.pdf",
+  "question": "What VAT rate is applied on the invoice?",
+  "answers": [
+   "20%"
+  ],
+  "page": 1,
+  "kind": "text"
+ }
+]

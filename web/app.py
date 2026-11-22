@@ -29,6 +29,7 @@ import logging
 import os
 import time
 import uuid
+from collections import OrderedDict
 from collections.abc import Callable, Iterator
 from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
@@ -51,6 +52,7 @@ from pdf_chat import (
     UploadedPdf,
     summary_prompt,
 )
+from pdfqa import DocumentQA, from_page_texts, parse_pdf
 from questionnaire import LibraryError, parse_library, run_autofill
 from review import PLAYBOOKS, ReviewError, run_review, to_csv_rows, to_ics
 from storage import DEFAULT_URL, Storage, StoragePool, to_datetime
@@ -71,12 +73,17 @@ class Settings:
     daily_budget_per_user: float = 1.00
     daily_budget_total: float = 5.00
     pool_size: int = 4
-    # Canned answers with real citations, for trying the app without an API key.
+    # Offline mode: chat answers come from the extractive pipeline (pdfqa) with verified
+    # quotes, reviews from keyword rules. No API key needed, nothing leaves the machine.
     demo: bool = False
 
     @classmethod
     def from_env(cls) -> "Settings":
         allowed = os.environ.get("ALLOWED_USERS", "")
+        # Without an API key the app falls back to offline mode instead of failing every
+        # request with 503; OFFLINE_FALLBACK=0 keeps the strict behaviour.
+        offline = (not os.environ.get("ANTHROPIC_API_KEY")
+                   and os.environ.get("OFFLINE_FALLBACK", "1") != "0")
         return cls(
             database_url=os.environ.get("PDF_CHAT_DB", DEFAULT_URL),
             auth_mode=os.environ.get("AUTH_MODE", "none").lower(),
@@ -84,7 +91,7 @@ class Settings:
             daily_budget_per_user=float(os.environ.get("DAILY_BUDGET_USD", "1.00")),
             daily_budget_total=float(os.environ.get("DAILY_BUDGET_TOTAL_USD", "5.00")),
             pool_size=int(os.environ.get("DB_POOL_SIZE", "4")),
-            demo=os.environ.get("DEMO_MODE") == "1",
+            demo=os.environ.get("DEMO_MODE") == "1" or offline,
         )
 
 
@@ -111,6 +118,11 @@ class ReviewRequest(BaseModel):
     playbook: str = Field(default="general", pattern="^(" + "|".join(PLAYBOOKS) + ")$")
     language: str = Field(default="English", min_length=2, max_length=40)
     refresh: bool = False
+
+
+class AskRequest(BaseModel):
+    question: str = Field(min_length=1, max_length=1000)
+    k: int = Field(default=5, ge=1, le=10)
 
 
 class AutofillRequest(BaseModel):
@@ -265,6 +277,10 @@ def create_app(settings: Settings | None = None,
                 raise HTTPException(502, "Could not store the PDF with Claude. Try again.") from None
             store.set_file_id(doc_id, uploaded.id)
         store.save_pages(doc_id, pdf.page_texts())
+        try:
+            store.save_layout(doc_id, parse_pdf(data).to_dict())
+        except Exception as e:  # a layout the parser can't handle must not block the upload
+            log.warning("Layout parsing failed for document %s: %s", doc_id, e)
         return _jsonable(next(d for d in store.list_documents(user.id) if d["id"] == doc_id))
 
     @app.delete("/api/documents/{doc_id}", status_code=204)
@@ -273,6 +289,7 @@ def create_app(settings: Settings | None = None,
         doc = store.delete_document(doc_id, user.id)
         if not doc:
             raise HTTPException(404, "Document not found.")
+        qa_cache.pop(doc_id, None)
         if doc["file_id"]:
             try:
                 claude().files.delete(doc["file_id"])
@@ -280,6 +297,52 @@ def create_app(settings: Settings | None = None,
                 pass
             except anthropic.APIError as e:  # the history is gone either way; log the orphan
                 log.warning("Could not delete file %s: %s", doc["file_id"], e)
+
+    # ---------- offline structure and evidence search (no API calls, no cost) ----------
+
+    qa_cache: OrderedDict[int, DocumentQA] = OrderedDict()
+
+    def document_qa(store: Storage, doc_id: int) -> DocumentQA:
+        if doc_id in qa_cache:
+            qa_cache.move_to_end(doc_id)
+            return qa_cache[doc_id]
+        raw = store.get_pages(doc_id)
+        layout = store.get_layout(doc_id)
+        qa = DocumentQA.from_dict(layout, raw) if layout else DocumentQA(from_page_texts(raw), raw)
+        qa_cache[doc_id] = qa
+        while len(qa_cache) > 32:
+            qa_cache.popitem(last=False)
+        return qa
+
+    @app.get("/api/documents/{doc_id}/structure")
+    def document_structure(doc_id: int, user: User = Depends(current_user), store: Storage = Depends(db)):
+        owned_document(store, user, doc_id)
+        return document_qa(store, doc_id).structure()
+
+    @app.post("/api/documents/{doc_id}/ask")
+    def ask_offline(doc_id: int, body: AskRequest, user: User = Depends(current_user),
+                    store: Storage = Depends(db)):
+        """Extractive answer with a verified page citation, plus the ranked passages behind it."""
+        owned_document(store, user, doc_id)
+        qa = document_qa(store, doc_id)
+        started = time.perf_counter()
+        result = qa.ask(body.question, k=max(body.k, 6))
+        elapsed = (time.perf_counter() - started) * 1000
+        return {
+            "question": body.question,
+            "answer": result.answer,
+            "answer_type": result.answer_type,
+            "abstained": result.abstained,
+            "page": result.page,
+            "quote": result.quote,
+            "section": result.section,
+            "verified": result.verified,
+            "confidence": result.confidence,
+            "passages": [{"rank": h.rank, "page": h.chunk.page, "kind": h.chunk.kind,
+                          "section": h.chunk.section, "text": h.chunk.text, "score": round(h.score, 3)}
+                         for h in result.hits[:body.k]],
+            "latency_ms": round(elapsed, 2),
+        }
 
     @app.get("/api/documents/{doc_id}/sessions")
     def document_sessions(doc_id: int, user: User = Depends(current_user),

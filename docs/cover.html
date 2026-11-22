@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8"><title>PDF AI Assistant</title><style>
+body { margin:0; width:1280px; height:720px; overflow:hidden; font-family:"Segoe UI",system-ui,sans-serif; background:linear-gradient(135deg,#04140f,#0b4a3a 52%,#0f8a6a); color:#fff; position:relative; }
+  body::after { content:""; position:absolute; inset:0; background:radial-gradient(circle at 85% 10%, rgba(110,231,183,.22), transparent 45%); pointer-events:none; }
+  .left { position:absolute; left:64px; top:52px; width:540px; z-index:1; }
+  .badge { display:inline-block; background:rgba(255,255,255,.15); padding:7px 14px; border-radius:99px; font-size:15px; margin-bottom:18px; }
+  h1 { font-size:58px; line-height:1.02; margin:0 0 10px; letter-spacing:-1px; }
+  .tag { font-size:21px; color:#a7f3d0; margin:0 0 20px; }
+  pre { background:#020617; color:#cbd5e1; border-radius:12px; padding:13px 16px; font:13.5px/1.62 Consolas, monospace; margin:0 0 20px; box-shadow:0 10px 30px rgba(0,0,0,.35); white-space:pre-wrap; }
+  pre .k { color:#7dd3fc; } pre .w { color:#fbbf24; } pre .g { color:#6ee7b7; } pre .m { color:#94a3b8; } pre .r { color:#fca5a5; }
+  ul { list-style:none; padding:0; margin:0; font-size:18.5px; line-height:1.7; }
+  li::before { content:"✓  "; color:#6ee7b7; font-weight:700; }
+  .shot { position:absolute; right:-90px; top:92px; width:700px; border-radius:14px; overflow:hidden; box-shadow:0 30px 70px rgba(0,0,0,.55); background:#0a0b10; border:1px solid rgba(255,255,255,.12); z-index:1; }
+  .shot img { width:100%; display:block; }
+</style></head><body>
+  <div class="left">
+    <span class="badge">Python · FastAPI · Claude API · Azure Container Apps · Azure SQL</span>
+    <h1>PDF AI Assistant</h1>
+    <p class="tag">Contract, invoice &amp; tender review where every quote is checked in code</p>
+    <pre><span class="m">review</span> invoice-2026-114.pdf  <span class="k">type</span>=invoice
+<span class="g">✓</span> 6 / 6 quotes found word for word in the PDF
+<span class="g">✓</span> sum of lines = subtotal
+<span class="r">✗</span> subtotal + tax: expected 10,344, document says 10,544
+<span class="w">HIGH</span>  bank details changed · confirm by phone before paying
+<span class="m">→ export: Excel (CSV) · deadlines (.ics)</span></pre>
+    <ul>
+      <li>Risks, key terms, deadlines and missing clauses</li>
+      <li>Invoice totals recalculated, quotes verified per page</li>
+      <li>Questionnaires answered from an approved library</li>
+      <li>Multi-user: Microsoft sign-in, budgets, Docker, CI/CD</li>
+    </ul>
+  </div>
+  <div class="shot"><img src="screenshot-invoice-review.png" alt=""></div>
+</body></html>

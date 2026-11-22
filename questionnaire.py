@@ -239,7 +239,8 @@ def run_autofill(client: anthropic.Anthropic, store: Storage, pdf: PdfFile | Upl
             report, usage = value
 
     report["grounding"] = ground_answers(report, {e["id"]: e for e in sent})
-    report["verification"] = verify_quotes(report, pages, sections=("questions",), field="question")
+    report["verification"] = verify_quotes(report, store.get_page_variants(document_id),
+                                          sections=("questions",), field="question")
     report["library"] = {"entries": len(library), "sent": len(sent), "fingerprint": fingerprint(library)}
 
     review_id = store.save_review(document_id, PLAYBOOK, language, report, usage)

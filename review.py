@@ -18,13 +18,13 @@ contain invented evidence or wrong sums:
 import json
 import re
 import time
-import unicodedata
 from collections.abc import Iterator
 from dataclasses import dataclass
 
 import anthropic
 
 from pdf_chat import MODEL, PdfFile, UploadedPdf, estimate_cost
+from pdfqa.verify import PageIndex, verify_items
 from storage import Storage, Usage
 
 PLAYBOOKS = {
@@ -169,7 +169,7 @@ def run_review(client: anthropic.Anthropic, store: Storage, pdf: PdfFile | Uploa
             report, usage = value
 
     report["risks"].sort(key=lambda r: SEVERITY_ORDER.get(r["severity"], 3))
-    report["verification"] = verify_quotes(report, store.get_pages(document_id))
+    report["verification"] = verify_quotes(report, store.get_page_variants(document_id))
     report["checks"] = check_arithmetic(report)
 
     review_id = store.save_review(document_id, playbook, language, report, usage)
@@ -221,57 +221,20 @@ def stream_report(client: anthropic.Anthropic, system: str, schema: dict,
 
 # ---------- quote verification ----------
 
-def _normalize(text: str) -> str:
-    """Lowercase words only: ignores line breaks, hyphenation, quote styles and punctuation."""
-    text = unicodedata.normalize("NFKC", text).replace("­", "")
-    text = re.sub(r"-\s*\n\s*", "", text)  # words hyphenated across lines
-    return " ".join(re.findall(r"\w+", text.lower()))
-
-
-def _found(quote: str, page_text: str) -> bool:
-    """The quote is on the page, word for word (gaps marked with an ellipsis are allowed)."""
-    parts = [_normalize(p) for p in re.split(r"\.\.\.|…", quote)]
-    parts = [p for p in parts if p]
-    if not parts:
-        return False
-    if all(p in page_text for p in parts):
-        return True
-    # Text extraction sometimes splits or merges words; accept a near-complete match.
-    words = " ".join(parts).split()
-    if len(words) < 6:
-        return False
-    shingles = {" ".join(words[i:i + 3]) for i in range(len(words) - 2)}
-    return sum(s in page_text for s in shingles) / len(shingles) >= 0.85
-
-
-def verify_quotes(report: dict, pages: list[str], sections=("key_facts", "risks", "deadlines"),
+def verify_quotes(report: dict, pages: list, sections=("key_facts", "risks", "deadlines"),
                   field: str = "quote") -> dict:
     """Mark each quoted finding verified, moved (to the right page), not_found, or unchecked.
 
     PDFs without a text layer (scans) can't be checked in code: every finding is "unchecked".
+    The matching itself lives in pdfqa.verify and is shared with chat and offline answers.
     """
-    normalized = [_normalize(p) for p in pages]
+    index = pages if isinstance(pages, PageIndex) else PageIndex(pages)
     counts = {"verified": 0, "moved": 0, "not_found": 0, "unchecked": 0}
-    has_text = any(normalized)
     for section in sections:
-        for item in report.get(section, []):
-            quote = item.get(field, "")
-            if not has_text or not quote.strip():
-                status = "unchecked"
-            else:
-                claimed = item.get("page") or 0
-                if 1 <= claimed <= len(normalized) and _found(quote, normalized[claimed - 1]):
-                    status = "verified"
-                else:
-                    actual = next((n for n, text in enumerate(normalized, start=1)
-                                   if _found(quote, text)), None)
-                    if actual:
-                        status, item["page"] = "moved", actual
-                    else:
-                        status = "not_found"
-            item["verified"] = status
-            counts[status] += 1
-    counts["text_layer"] = has_text
+        section_counts = verify_items(report.get(section, []), index, field)
+        for key, value in section_counts.items():
+            counts[key] += value
+    counts["text_layer"] = index.has_text
     return counts
 
 

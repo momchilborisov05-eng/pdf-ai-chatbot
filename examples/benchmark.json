@@ -1,0 +1,368 @@
+{
+  "date": "2026-11-20",
+  "machine": {
+    "platform": "Windows 11 (AMD64)",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "python": "3.12.3",
+    "pypdf": "6.19.0"
+  },
+  "corpus": {
+    "documents": 5,
+    "pages": 16,
+    "questions": 66
+  },
+  "layout": {
+    "pipeline": "layout",
+    "answerable": 59,
+    "unanswerable": 7,
+    "recall": {
+      "@1": 94.9,
+      "@3": 100.0,
+      "@5": 100.0
+    },
+    "mrr": 0.972,
+    "answer_accuracy": 94.9,
+    "exact_match": 55.9,
+    "citation_correct": 94.9,
+    "false_abstention": 1.7,
+    "abstention_on_unanswerable": 100.0,
+    "accuracy_by_kind": {
+      "table": {
+        "correct": 11,
+        "total": 11,
+        "accuracy": 100.0
+      },
+      "text": {
+        "correct": 30,
+        "total": 32,
+        "accuracy": 93.8
+      },
+      "two-column": {
+        "correct": 15,
+        "total": 16,
+        "accuracy": 93.8
+      }
+    },
+    "failures": [
+      {
+        "question": "How many passenger journeys did Meridian carry in 2025?",
+        "expected": "112.4 million",
+        "expected_page": 1,
+        "got": "100,000",
+        "page": 3
+      },
+      {
+        "question": "What is the mileage rate for using your own car?",
+        "expected": "EUR 0.32",
+        "expected_page": 2,
+        "got": "(abstained)",
+        "page": null
+      },
+      {
+        "question": "What VAT rate is applied on the invoice?",
+        "expected": "20%",
+        "expected_page": 1,
+        "got": "2026",
+        "page": 1
+      }
+    ]
+  },
+  "naive": {
+    "pipeline": "naive",
+    "answerable": 59,
+    "unanswerable": 7,
+    "recall": {
+      "@1": 84.7,
+      "@3": 96.6,
+      "@5": 96.6
+    },
+    "mrr": 0.907,
+    "answer_accuracy": 61.0,
+    "exact_match": 33.9,
+    "citation_correct": 62.7,
+    "false_abstention": 11.9,
+    "abstention_on_unanswerable": 100.0,
+    "accuracy_by_kind": {
+      "table": {
+        "correct": 8,
+        "total": 11,
+        "accuracy": 72.7
+      },
+      "text": {
+        "correct": 22,
+        "total": 32,
+        "accuracy": 68.8
+      },
+      "two-column": {
+        "correct": 6,
+        "total": 16,
+        "accuracy": 37.5
+      }
+    },
+    "failures": [
+      {
+        "question": "How many passenger journeys did Meridian carry in 2025?",
+        "expected": "112.4 million",
+        "expected_page": 1,
+        "got": "(abstained)",
+        "page": null
+      },
+      {
+        "question": "What overall punctuality did Meridian reach?",
+        "expected": "94.2 percent",
+        "expected_page": 1,
+        "got": "(abstained)",
+        "page": null
+      },
+      {
+        "question": "What share of delay minutes was caused by signalling failures on the Harbour Line?",
+        "expected": "31 percent",
+        "expected_page": 1,
+        "got": "(abstained)",
+        "page": null
+      },
+      {
+        "question": "How much of the capital programme is reserved for new rolling stock?",
+        "expected": "EUR 210 million",
+        "expected_page": 1,
+        "got": "EUR 95",
+        "page": 1
+      },
+      {
+        "question": "What was the staff turnover rate?",
+        "expected": "8.6 percent",
+        "expected_page": 2,
+        "got": "Staff turnover was the Riverside depot.",
+        "page": 2
+      },
+      {
+        "question": "How much traction energy was used per train kilometre?",
+        "expected": "19.6 kWh",
+        "expected_page": 2,
+        "got": "0.42",
+        "page": 2
+      },
+      {
+        "question": "By when will the diesel units on the Northern Loop be replaced?",
+        "expected": "2028",
+        "expected_page": 2,
+        "got": "employees, with particular attention to track access Diesel units still operate ",
+        "page": 2
+      },
+      {
+        "question": "How much non-fare income came from advertising, retail units and property rentals?",
+        "expected": "EUR 57 million",
+        "expected_page": 3,
+        "got": "38",
+        "page": 3
+      },
+      {
+        "question": "Which firm audited the financial statements?",
+        "expected": "Calder & Wynn LLP",
+        "expected_page": 4,
+        "got": "Operating profit before depreciation (EBITDA) was The financial statements were ",
+        "page": 4
+      },
+      {
+        "question": "How many new battery-electric trains will enter service?",
+        "expected": "24",
+        "expected_page": 4,
+        "got": "battery-electric trains will enter service on the Nort-",
+        "page": 4
+      },
+      {
+        "question": "How long can the pump run dry before the mechanical seal is damaged?",
+        "expected": "30 seconds",
+        "expected_page": 1,
+        "got": "(abstained)",
+        "page": null
+      },
+      {
+        "question": "What is the remedy for noise caused by cavitation?",
+        "expected": "Increase the inlet pressure",
+        "expected_page": 4,
+        "got": "Fault Cause Remedy",
+        "page": 4
+      },
+      {
+        "question": "How far in advance must trips be booked through the travel agency?",
+        "expected": "14 days",
+        "expected_page": 1,
+        "got": "All flights, trains and hotels must be booked through the company travel agency,",
+        "page": 1
+      },
+      {
+        "question": "When may premium economy be booked?",
+        "expected": "more than 6 hours",
+        "expected_page": 2,
+        "got": "Premium economy may be booked for flights with a scheduled",
+        "page": 2
+      },
+      {
+        "question": "What is the mileage rate for using your own car?",
+        "expected": "EUR 0.32",
+        "expected_page": 2,
+        "got": "(abstained)",
+        "page": null
+      },
+      {
+        "question": "Above what journey time is first class rail allowed?",
+        "expected": "2 hours",
+        "expected_page": 2,
+        "got": "First class rail travel is allowed for journeys",
+        "page": 2
+      },
+      {
+        "question": "What is the hotel rate per night in London?",
+        "expected": "EUR 230",
+        "expected_page": 3,
+        "got": "Hotels are booked up to the city rate in the table below, per night, including b",
+        "page": 3
+      },
+      {
+        "question": "What is the daily meal allowance in Sofia?",
+        "expected": "EUR 38",
+        "expected_page": 3,
+        "got": "5",
+        "page": 4
+      },
+      {
+        "question": "Above what amount is an itemised receipt required?",
+        "expected": "EUR 25",
+        "expected_page": 4,
+        "got": "(abstained)",
+        "page": null
+      },
+      {
+        "question": "What is the travel insurance policy number?",
+        "expected": "TRV-55-0192",
+        "expected_page": 5,
+        "got": "All business travellers are covered by the group travel insurance with Aurora As",
+        "page": 5
+      },
+      {
+        "question": "How long is the initial term of the agreement?",
+        "expected": "24 months",
+        "expected_page": 1,
+        "got": "2026",
+        "page": 1
+      },
+      {
+        "question": "By what date must administrator access to the platform be provided?",
+        "expected": "20 November 2026",
+        "expected_page": 2,
+        "got": "The Client shall provide administrator access to the current platform by 20 Nove",
+        "page": 2
+      },
+      {
+        "question": "What VAT rate is applied on the invoice?",
+        "expected": "20%",
+        "expected_page": 1,
+        "got": "(abstained)",
+        "page": null
+      }
+    ]
+  },
+  "verifier": {
+    "exact_passed": 58,
+    "exact_total": 58,
+    "moved_detected": 53,
+    "moved_page_fixed": 53,
+    "moved_total": 53,
+    "number_detected": 52,
+    "number_total": 52,
+    "word_detected": 57,
+    "word_total": 58,
+    "exact_pass_rate": 100.0,
+    "wrong_page_detected": 100.0,
+    "wrong_page_corrected": 100.0,
+    "changed_number_detected": 100.0,
+    "swapped_word_detected": 98.3
+  },
+  "two_column_quotes": {
+    "document": "meridian-annual-report.pdf",
+    "quotes": 18,
+    "found_in_raw_pypdf_text": 4,
+    "found_in_layout_text": 18
+  },
+  "layout_stats": {
+    "hx200-pump-manual.pdf": {
+      "pages": 4,
+      "headings": 12,
+      "paragraphs": 15,
+      "tables": 3,
+      "two_column_pages": 0,
+      "furniture_lines": 8,
+      "unpositioned_pages": 0,
+      "chunks": 23,
+      "table_row_chunks": 15
+    },
+    "invoice-2026-114.pdf": {
+      "pages": 1,
+      "headings": 0,
+      "paragraphs": 5,
+      "tables": 1,
+      "two_column_pages": 0,
+      "furniture_lines": 0,
+      "unpositioned_pages": 0,
+      "chunks": 7,
+      "table_row_chunks": 4
+    },
+    "meridian-annual-report.pdf": {
+      "pages": 4,
+      "headings": 12,
+      "paragraphs": 26,
+      "tables": 1,
+      "two_column_pages": 4,
+      "furniture_lines": 8,
+      "unpositioned_pages": 0,
+      "chunks": 18,
+      "table_row_chunks": 4
+    },
+    "service-agreement.pdf": {
+      "pages": 2,
+      "headings": 10,
+      "paragraphs": 24,
+      "tables": 0,
+      "two_column_pages": 0,
+      "furniture_lines": 0,
+      "unpositioned_pages": 0,
+      "chunks": 13,
+      "table_row_chunks": 0
+    },
+    "travel-policy.pdf": {
+      "pages": 5,
+      "headings": 11,
+      "paragraphs": 20,
+      "tables": 1,
+      "two_column_pages": 0,
+      "furniture_lines": 10,
+      "unpositioned_pages": 0,
+      "chunks": 18,
+      "table_row_chunks": 6
+    }
+  },
+  "speed": {
+    "ingest": {
+      "layout": {
+        "pages": 16,
+        "pages_per_s": 52.0
+      },
+      "naive": {
+        "pages": 16,
+        "pages_per_s": 124.4
+      }
+    },
+    "query": {
+      "queries": 330,
+      "p50_ms": 2.81,
+      "p95_ms": 7.38,
+      "max_ms": 35.18
+    },
+    "stress": {
+      "pages": 100,
+      "pages_per_s": 77.3
+    }
+  },
+  "quick": false
+}

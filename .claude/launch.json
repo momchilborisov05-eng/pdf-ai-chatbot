@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "pdf-chatbot-demo",
+      "runtimeExecutable": ".venv/Scripts/python",
+      "runtimeArgs": ["-m", "uvicorn", "web.app:create_app", "--factory", "--port", "8120"],
+      "env": { "DEMO_MODE": "1" },
+      "port": 8120
+    },
+    {
+      "name": "shopify-assistant-demo",
+      "runtimeExecutable": "C:/Users/Moni/Documents/upwork projects/portfolio/15-shopify-shopping-assistant/.venv/Scripts/python.exe",
+      "runtimeArgs": ["-m", "uvicorn", "web.app:create_app", "--factory", "--port", "8015", "--app-dir", "C:/Users/Moni/Documents/upwork projects/portfolio/15-shopify-shopping-assistant"],
+      "env": { "DEMO_MODE": "1", "PYTHONUTF8": "1" },
+      "port": 8015
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 """
-Demo mode: a stand-in for the Claude client, so the web app can be tried
-without an API key (DEMO_MODE=1). Answers are canned, but they quote real text
-from the uploaded PDF with real page numbers, so citations, history, search
-and cost tracking all work exactly as with the real API.
+Offline mode: a stand-in for the Claude client, so the web app works without
+an API key (DEMO_MODE=1, or no ANTHROPIC_API_KEY). Chat answers come from the
+extractive pipeline in pdfqa: layout-aware parsing, BM25F retrieval, a typed
+short answer and a quote that is checked against the page before it is shown.
+It abstains when the document doesn't answer the question. Citations, history,
+search and cost tracking work exactly as with the real API.
 
 Reviews are built with simple keyword rules instead of a model: they quote
 real sentences, so quote verification, invoice arithmetic checks and the
@@ -20,21 +22,29 @@ import uuid
 from anthropic.types.beta import BetaMessage
 from pypdf import PdfReader
 
-DEMO_MODEL = "demo"
+from pdfqa import DocumentQA, from_page_texts
+
+DEMO_MODEL = "offline (pdfqa)"
 
 
 class _Files:
     def __init__(self):
         self.pages: dict[str, list[str]] = {}
+        self.qa: dict[str, DocumentQA] = {}
 
     def upload(self, file):
         _, data, _ = file
         file_id = f"file_demo_{uuid.uuid4().hex[:12]}"
         self.pages[file_id] = _page_texts(data)
+        try:
+            self.qa[file_id] = DocumentQA.from_pdf(data)
+        except Exception:  # fall back to plain text below
+            pass
         return type("FileMetadata", (), {"id": file_id, "size_bytes": len(data)})()
 
     def delete(self, file_id):
         self.pages.pop(file_id, None)
+        self.qa.pop(file_id, None)
 
 
 class _Stream:
@@ -68,10 +78,17 @@ class DemoClient:
     def stream(self, *, messages, output_config=None, **_):
         content = messages[0]["content"]
         document = next(b for b in content if b["type"] == "document")["source"]
+        qa = None
         if document["type"] == "file":
             pages = self.files.pages.get(document["file_id"]) or []
+            qa = self.files.qa.get(document["file_id"])
         else:  # base64, from the command line
-            pages = _page_texts(base64.b64decode(document["data"]))
+            data = base64.b64decode(document["data"])
+            pages = _page_texts(data)
+            try:
+                qa = DocumentQA.from_pdf(data)
+            except Exception:
+                qa = None
         if output_config and output_config.get("format"):
             if "questions" in output_config["format"]["schema"]["properties"]:
                 report = demo_questionnaire(pages, _library(content[0]["text"]))
@@ -83,19 +100,32 @@ class DemoClient:
         if isinstance(question, list):
             question = question[-1]["text"]
 
-        page_no, passage = _best_passage(pages, question)
-        if passage:
-            text = (f"Demo mode (no API key): this is a canned answer. The most relevant passage "
-                    f"for your question is on page {page_no}.")
-            citations = [{
-                "type": "page_location", "cited_text": passage, "document_index": 0,
-                "document_title": "demo", "start_page_number": page_no, "end_page_number": page_no + 1,
-            }]
-        else:
-            text = "Demo mode (no API key): this PDF has no extractable text, so there is nothing to quote."
-            citations = []
-
+        text, citations = offline_answer(qa, pages, question)
         return _Stream(_message(text, citations), text)
+
+
+def offline_answer(qa: DocumentQA | None, pages: list[str], question: str) -> tuple[str, list[dict]]:
+    """An extractive answer and its page citation, or an honest "not found"."""
+    if not any(p.strip() for p in pages):
+        return ("Offline mode: this PDF has no extractable text (probably a scan), so there is "
+                "nothing to quote."), []
+    qa = qa or DocumentQA(from_page_texts(pages), pages)
+    result = qa.ask(question)
+    if result.abstained:
+        return ("Offline mode: I could not find this in the document. The closest passages share too few "
+                "of the question's words to answer from them."), []
+    where = f"page {result.page}" + (f", {result.section.split(' > ')[-1]}" if result.section else "")
+    if result.answer.strip() == result.quote.strip():
+        text = f"Offline answer ({where}): {result.answer}"
+    else:
+        text = f"{result.answer}. Offline answer from {where}, quoted below."
+    if result.verified != "verified":
+        text += " The quote could not be matched to the page text, so check it."
+    citations = [{
+        "type": "page_location", "cited_text": result.quote, "document_index": 0,
+        "document_title": "offline", "start_page_number": result.page, "end_page_number": result.page + 1,
+    }]
+    return text, citations
 
 
 def _page_texts(data: bytes) -> list[str]:
@@ -242,18 +272,3 @@ def _unwrap(page: str) -> list[str]:
 
 def _number(text: str) -> float:
     return float(text.replace(",", ""))
-
-
-def _best_passage(pages: list[str], question: str) -> tuple[int, str]:
-    """The sentence sharing the most words with the question (simple keyword overlap)."""
-    words = {w.lower().strip(".,?!:;") for w in question.split() if len(w) > 3}
-    best = (0, 0, "")
-    for number, page in enumerate(pages, start=1):
-        for sentence in page.replace("\n", " ").split(". "):
-            sentence = sentence.strip()
-            if len(sentence) < 20:
-                continue
-            score = len(words & {w.lower().strip(".,?!:;") for w in sentence.split()})
-            if score > best[0] or not best[2]:
-                best = (score, number, sentence[:300])
-    return best[1], best[2]

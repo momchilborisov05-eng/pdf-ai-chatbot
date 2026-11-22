@@ -11,7 +11,7 @@ RUN pip install -r requirements.txt
 # ---------- runtime stage: slim image, non-root user ----------
 FROM python:3.12-slim AS runtime
 LABEL org.opencontainers.image.title="pdf-ai-assistant" \
-      org.opencontainers.image.description="Chat with PDFs using Claude (FastAPI)" \
+      org.opencontainers.image.description="Chat with PDFs using Claude, with an offline layout-aware mode (FastAPI)" \
       org.opencontainers.image.source="https://github.com/momchilborisov05-eng/pdf-ai-chatbot"
 
 # Libraries the mssql-python driver needs on Debian.
@@ -32,6 +32,7 @@ WORKDIR /app
 COPY --from=build /opt/venv /opt/venv
 COPY --chown=app:app pdf_chat.py review.py questionnaire.py autofill.py storage.py ./
 COPY --chown=app:app web ./web
+COPY --chown=app:app pdfqa ./pdfqa
 
 USER app
 EXPOSE 8000

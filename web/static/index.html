@@ -89,6 +89,7 @@
               <option>French</option><option>Spanish</option><option>Italian</option>
             </select>
             <button id="summary-btn" type="button" class="ghost">Summary</button>
+            <button id="inspect-btn" type="button" class="ghost" title="Parsed layout and offline evidence search">Inspect</button>
             <button id="new-chat-btn" type="button" class="ghost">New chat</button>
           </div>
         </div>
@@ -114,6 +115,32 @@
           </div>
         </div>
         <div id="review-body" class="review-body"></div>
+      </section>
+
+      <section id="inspect" class="results hidden">
+        <div class="chat-head">
+          <div>
+            <h1 id="inspect-title"></h1>
+            <p id="inspect-meta" class="muted"></p>
+          </div>
+          <div class="chat-actions">
+            <button id="inspect-close" type="button" class="ghost">Back to chat</button>
+          </div>
+        </div>
+        <div class="inspect">
+          <div class="evidence-pane">
+            <h2>Evidence search <span class="muted">offline, no model call</span></h2>
+            <form id="evidence-form" class="evidence-form">
+              <input id="evidence-q" type="text" maxlength="500" placeholder="e.g. What is the hotel cap in Vienna?" aria-label="Question" required>
+              <button type="submit">Find</button>
+            </form>
+            <div id="evidence-result"></div>
+          </div>
+          <div class="structure-pane">
+            <h2>What the parser found</h2>
+            <div id="structure-body"></div>
+          </div>
+        </div>
       </section>
 
       <section id="results" class="results hidden">
